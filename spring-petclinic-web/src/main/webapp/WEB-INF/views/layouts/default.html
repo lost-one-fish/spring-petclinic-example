@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<link th:href="@{/resources/main/images/favicon.ico}" rel="shortcut icon"></link>
+		<title>Spring-boot-starter</title>
+		<link th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" rel="stylesheet"></link>
+		<link th:href="@{/resources/main/css/core.css}" rel="stylesheet"></link>
+		
+			
+	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	    <style type="text/css">
+	    </style>
+		<style th:replace="${view} :: style"></style>
+	</head>
+	
+	
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div th:replace="layouts/fragments/header :: header"></div>
+		</div>
+		<!-- /.navbar -->
+		
+		<br/>	
+		<div class="inner cover" th:replace="${view} :: content"></div>
+		<hr/>
+		<!--/.container-->
+	
+		<div th:replace="layouts/fragments/footer :: footer"></div>
+	
+		<!-- Bootstrap core JavaScript
+	    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+	
+		<script th:src="@{/resources/main/js/main.js}"></script>
+
+		<script>
+			$(function(){
+			});
+		</script>
+		<div th:replace="${view} :: script"></div>
+	</body>
+
+
+</html>

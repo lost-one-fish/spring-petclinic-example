@@ -1,0 +1,14 @@
+
+
+
+
+<div class="container"  th:fragment="content">
+
+    <h2>Something happened...Exception</h2>
+
+    <p th:text="${exception.message}">The exception message...</p>
+    <div th:each="x : ${exception.stackTrace}">
+    	<div th:text="${x.className} + ':' + ${x.methodName} + ':' + ${x.lineNumber}"></div>
+    </div>
+
+</div>

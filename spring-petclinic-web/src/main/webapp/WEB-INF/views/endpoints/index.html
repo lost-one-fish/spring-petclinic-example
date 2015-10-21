@@ -1,0 +1,20 @@
+
+<div th:fragment="content">
+	<div class="container bs-docs-container">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Patterns</th>
+					<th>Methods</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="data, row : ${apis}">
+					<td><a th:href="@{#}" th:text="${data.patternsCondition}"></a></td>
+					<td th:text="${data.methodsCondition}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+

@@ -1,0 +1,94 @@
+
+<style type="text/css" th:fragment="css">
+	.form-signin {
+	  max-width: 330px;
+	  padding: 15px;
+	  margin: 0 auto;
+	}
+	.form-signin .form-signin-heading,
+	.form-signin .checkbox {
+	  margin-bottom: 10px;
+	}
+	.form-signin .checkbox {
+	  font-weight: normal;
+	}
+	.form-signin .form-control {
+	  position: relative;
+	  height: auto;
+	  -webkit-box-sizing: border-box;
+	     -moz-box-sizing: border-box;
+	          box-sizing: border-box;
+	  padding: 10px;
+	  font-size: 16px;
+	}
+	.form-signin .form-control:focus {
+	  z-index: 2;
+	}
+	.form-signin input[type="email"] {
+	  margin-bottom: -1px;
+	  border-bottom-right-radius: 0;
+	  border-bottom-left-radius: 0;
+	}
+	.form-signin input[type="password"] {
+	  margin-bottom: 10px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+
+</style>
+
+<script th:inline="javascript" th:fragment="script">
+	/*<![CDATA[*/
+	$(function() {
+	    $("#userGuide").click(function(){
+            intro();
+        });
+	});
+
+	function intro(){
+		var intro = introJs();
+	  	intro.setOptions({
+	        steps: [
+	          { element: '#login', intro: '<h3>登入帳號密碼</h3>' },
+	        ]
+	  });
+	  intro.setOption('tooltipPosition', 'auto');
+	  intro.setOptions({ 'nextLabel': '下一步', 'prevLabel': '上一步', 'skipLabel': 'skip', 'doneLabel': '完成' });
+	  intro.start();
+	  intro.oncomplete(function() {
+		window.location.href = '/CardiologyEMRIE-web/intro02/';
+	  });
+	}
+	/*]]>*/
+</script>
+
+<div th:fragment="content">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  <li><a th:href="@{/}">Home</a></li>
+		  		  <li><a th:href="@{/User/login/}">Login</a></li>
+				</ol>
+			</div>
+		</div>
+		<form id="login" th:action="@{/j_spring_security_check}" th:method="post" class="form-signin" role="form">
+			<p th:if="${loginError}">Wrong user or password</p>
+			<h3 class="form-signin-heading">Login</h3>
+			<input type="email" class="form-control" placeholder="Email address" name="j_username" value="" required="required" autofocus="autofocus" /> 
+			<input type="password" class="form-control" placeholder="Password" name="j_password" required="required" /> 
+			<!--
+			<label class="checkbox"> 
+				<input type="checkbox" value="true" name="_spring_security_remember_me"/> Remember me
+			</label>
+			-->
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<!--
+			<a th:href="@{/User/create/}" >Sign Up</a>/
+			<a th:href="@{/User/forgetPassword/}" >Forget Password</a>
+			-->
+
+		</form>
+   	</div>
+</div>
+

@@ -1,0 +1,23 @@
+
+<style type="text/css" th:fragment="css">
+
+</style>
+
+<script th:inline="javascript" th:fragment="script">
+	/*<![CDATA[*/
+
+	$(function(){
+
+	});
+
+	/*]]>*/
+</script>
+
+<div th:fragment="content">
+	<div class="container bs-docs-container">
+		<h1>Hellow</h1>
+		<P th:text="${serverTime}"> The time on the server is . </P>
+	</div>
+</div>
+
+

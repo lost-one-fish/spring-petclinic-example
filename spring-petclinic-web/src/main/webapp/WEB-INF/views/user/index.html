@@ -1,0 +1,38 @@
+<style type="text/css" th:fragment="css">
+</style>
+<script th:inline="javascript" th:fragment="script">
+	/*<![CDATA[*/
+	$(function() {
+	});
+	/*]]>*/
+</script>
+
+<div th:fragment="content">
+	<div class="bs-docs-header">
+		<!-- /* Handle the flash message */-->
+		<th:block th:if="${message != null}">
+		</th:block>
+		<span id="notification" style="display:none;"></span>
+		<div id="tmp"></div>
+		<br/>		
+	</div>
+	<div class="container bs-docs-container">	
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  <li><a th:href="@{/}">Home</a></li>
+		  		  <li><a th:href="@{/User/}">User</a></li>
+				</ol>
+			</div>
+		</div>
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+		  This content is only shown to administrators.
+		</div>
+		<div sec:authorize="hasRole('ROLE_USER')">
+		  This content is only shown to users.
+		</div>
+		Logged user: <span sec:authentication="name">Bob</span>
+		Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+	</div>
+</div>
+

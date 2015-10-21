@@ -1,0 +1,5 @@
+/spring-petclinic-web/.settings
+/spring-petclinic-web/*.classpath
+/spring-petclinic-web/.externalToolBuilders/*.launch
+/spring-petclinic-web/*.project
+/install.log
