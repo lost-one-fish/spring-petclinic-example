@@ -56,10 +56,10 @@
 
 	<!-- service-auth -->
 	<security:authentication-manager id="service-auth" alias="authenticationManager">
-		<security:authentication-provider ref="GaduoAuthenticationProvider" />
+		<security:authentication-provider ref="SpringAuthenticationProvider" />
 	</security:authentication-manager>
 	
-	<beans:bean id="GaduoAuthenticationProvider" class="edu.tcu.mi.spring.web.security.PetclinicAuthenticationProvider"></beans:bean>
+	<beans:bean id="SpringAuthenticationProvider" class="edu.tcu.mi.spring.web.security.SpringAuthenticationProvider"></beans:bean>
 	
 	<!-- jdbc-auth -->
 	<!-- security:authentication-manager id="jdbc-auth">

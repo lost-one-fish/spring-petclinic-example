@@ -11,16 +11,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import edu.tcu.mi.spring.web.entity.User;
 import edu.tcu.mi.spring.web.security.Authority;
 
-public class GaduoUserDetails implements UserDetails {
+public class PetclinicUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1L;
-	public static Logger logger = Logger.getLogger(GaduoUserDetails.class);
+	public static Logger logger = Logger.getLogger(PetclinicUserDetails.class);
 	private User user;
 
-    public GaduoUserDetails() {
+    public PetclinicUserDetails() {
         this.user = new User();
     }
     
-	public GaduoUserDetails(User user) {
+	public PetclinicUserDetails(User user) {
 		this.user = user;
 	}
 

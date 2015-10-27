@@ -3,3 +3,5 @@
 /spring-petclinic-web/.externalToolBuilders/*.launch
 /spring-petclinic-web/*.project
 /install.log
+/spring-petclinic-web/bin/*.gitignore
+/spring-petclinic-web/bin
