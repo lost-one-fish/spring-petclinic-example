@@ -12,9 +12,6 @@
 					    http://www.springframework.org/schema/context
 					    http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	<!-- enable use-expressions -->
-	<!-- <http pattern="/resources/**" security="none"/> -->
-
 	<security:http authentication-manager-ref="service-auth" auto-config="true" use-expressions="true">
 		<!-- Login pages -->
 		<security:form-login 
@@ -62,7 +59,7 @@
 		<security:authentication-provider ref="GaduoAuthenticationProvider" />
 	</security:authentication-manager>
 	
-	<beans:bean id="GaduoAuthenticationProvider" class="edu.tcu.mi.spring.web.security.GaduoAuthenticationProvider"></beans:bean>
+	<beans:bean id="GaduoAuthenticationProvider" class="edu.tcu.mi.spring.web.security.PetclinicAuthenticationProvider"></beans:bean>
 	
 	<!-- jdbc-auth -->
 	<!-- security:authentication-manager id="jdbc-auth">

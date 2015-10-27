@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import com.google.gson.Gson;
 
 public class Authority implements GrantedAuthority{
 
@@ -45,7 +46,8 @@ public class Authority implements GrantedAuthority{
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).add("auth", auth).toString();
+		Gson gson = new Gson();
+		return gson.toJson(this);
 	}
     
     

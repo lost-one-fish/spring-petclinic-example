@@ -16,7 +16,7 @@ import edu.tcu.mi.spring.web.repository.UserRepository;
 import edu.tcu.mi.spring.web.security.entity.GaduoUserDetails;
 
 @Service
-public class UserService extends GenericService<User> implements UserDetailsService, MessageSourceAware {
+public class UserService extends AbstractGenericService<User> implements UserDetailsService, MessageSourceAware {
 
 	@Autowired 
 	private UserRepository repository;
@@ -26,9 +26,7 @@ public class UserService extends GenericService<User> implements UserDetailsServ
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
     	User user = repository.findOne(username);
-    	if (user != null)
-    		logger.info(user.toString());
-    	else 
+    	if (user == null)
     		throw new UsernameNotFoundException(username);
 		return new GaduoUserDetails(user);
     }
@@ -44,7 +42,7 @@ public class UserService extends GenericService<User> implements UserDetailsServ
 	}
 
 	@Override
-	protected GenericRepository<User> getRepository() {
+	GenericRepository<User> getRepository() {
 		return repository;
 	}
     

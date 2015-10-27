@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 import com.google.gson.Gson;
@@ -14,7 +15,9 @@ import edu.tcu.mi.spring.web.security.Authority;
 
 @Entity
 @Table(name = "User")
+@Document
 public class User {
+	@org.springframework.data.annotation.Id
 	@Id
 	@Column(name = "username")
 	private String username;
@@ -29,7 +32,7 @@ public class User {
 	private static ShaPasswordEncoder encoder = new ShaPasswordEncoder();
 	
 	@Transient
-	public static final String SEED = "Gaduo";
+	public static final String SEED = "Petclinic";
 	
 	public User(){
 		this.role = Authority.ROLE_ANONYMOUS;

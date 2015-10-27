@@ -6,6 +6,6 @@
 
     <!-- <import resource="classpath:META-INF/persistence.xml"/> -->
     <import resource="classpath:spring/business-context.xml"/>
-    <import resource="classpath:spring/servlet-context.xml"/>
+    <import resource="classpath:spring/webmvc-context.xml"/>
 
 </beans>

@@ -36,7 +36,7 @@ public class UserRestController extends GenericRestController<User> {
 			return new ResponseEntity<>(body, HttpStatus.OK);
 		}
 		
-		List<User> resources = service.findAll();
+		Iterable<User> resources = service.findAll();
 		String body = gson.toJson(resources);
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}	

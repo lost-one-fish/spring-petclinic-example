@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Repository and Service layers -->
-<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+<beans:beans 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/tx 
@@ -10,14 +15,35 @@
 						http://www.springframework.org/schema/context 
 						http://www.springframework.org/schema/context/spring-context.xsd
 						http://www.springframework.org/schema/data/jpa 
-						http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+						http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+						http://www.springframework.org/schema/data/mongo 
+						http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd">
 
 	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
 	<context:component-scan base-package="edu.tcu.mi.spring.web.service" />
-	<context:component-scan base-package="edu.tcu.mi.spring.web.repository" />
-
+ 
+	<beans:beans profile="mongodb">           
+        <mongo:repositories base-package="edu.tcu.mi.spring.web.repository.mongo"/>
+		<context:property-placeholder location="classpath:data-access.properties" />
+		
+		<mongo:mongo id="mongo" host="${mongo.host.name}" port="${mongo.host.port}"/>
+	  
+		<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+			<beans:constructor-arg ref="mongo" />
+		  	<beans:constructor-arg value="${mongo.databaseName}" />
+		</beans:bean>
+		
+		<!-- 
+		<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+			<beans:constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+		</beans:bean>
+		<mongo:db-factory id="mongoDbFactory" host="${mongo.host.name}" port="${mongo.host.port}" dbname="${mongo.databaseName}" username="${mongo.username}" password="${mongo.password}"/>
+		 -->
+		
+	</beans:beans>
+	
 	<beans:beans profile="jpa">
-		<jpa:repositories base-package="edu.tcu.mi.spring.web.repository" />
+		<jpa:repositories base-package="edu.tcu.mi.spring.web.repository.jpa" />
 		<context:property-placeholder location="classpath:data-access.properties" />
 
 		<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -25,11 +51,6 @@
 			<beans:property name="url" value="${jdbc.url}" />
 			<beans:property name="username" value="${jdbc.username}" />
 			<beans:property name="password" value="${jdbc.password}" />
-			<beans:property name="testOnBorrow" value="true" />
-			<beans:property name="validationQuery" value="SELECT 'Y'" />
-			<beans:property name="initialSize" value="10" />
-			<beans:property name="removeAbandonedTimeout" value="10" />
-			<beans:property name="maxActive" value="20" />
 		</beans:bean>
 
 		<beans:bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -37,9 +58,6 @@
 			<beans:property name="database" value="${hibernate.database}" />
 			<beans:property name="databasePlatform" value="${hibernate.databasePlatform}" />
 		</beans:bean>
-
-		<beans:bean id="persistenceProvider" class="org.hibernate.ejb.HibernatePersistence"/> 
-		<beans:bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
 		
 		<beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 			<beans:property name="dataSource" ref="dataSource" />
@@ -49,19 +67,10 @@
 					<beans:value>edu.tcu.mi.spring.web.entity</beans:value>
 				</beans:list>
 			</beans:property>
-			<beans:property name="persistenceUnitName" value="MyPersistenceUnit" />
-			<beans:property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
-  			<beans:property name="persistenceProvider" ref="persistenceProvider"/>
- 			<beans:property name="jpaDialect" ref="jpaDialect"/>    
-			<beans:property name="jpaProperties">  
-				<beans:props>  
-				    <beans:prop key="hibernate.show_sql">${hibernate.show_sql}</beans:prop>  
-				</beans:props>  
-			</beans:property>  
 		</beans:bean>
 
-		<tx:annotation-driven transaction-manager="transactionManager" />
-		<beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" />
+        <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+              p:entityManagerFactory-ref="entityManagerFactory"/>
 	</beans:beans>
 
 
