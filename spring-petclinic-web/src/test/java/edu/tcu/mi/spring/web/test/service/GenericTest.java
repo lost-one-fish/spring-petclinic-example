@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-context.xml" })
-@ActiveProfiles("mongodb")
+@ActiveProfiles("jpa")
 public class GenericTest {
 	protected static final Logger logger = Logger.getLogger(GenericTest.class);
 
