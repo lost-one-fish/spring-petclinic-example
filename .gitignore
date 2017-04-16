@@ -5,3 +5,7 @@
 /install.log
 /spring-petclinic-web/bin/*.gitignore
 /spring-petclinic-web/bin
+
+.idea/*
+*.iml
+*.log
