@@ -75,8 +75,8 @@
 		<form id="login" th:action="@{/j_spring_security_check}" th:method="post" class="form-signin" role="form">
 			<p th:if="${loginError}">Wrong user or password</p>
 			<h3 class="form-signin-heading">Login</h3>
-			<input type="email" class="form-control" placeholder="Email address" name="j_username" value="" required="required" autofocus="autofocus" /> 
-			<input type="password" class="form-control" placeholder="Password" name="j_password" required="required" /> 
+			<input type="email" class="form-control" placeholder="Email address" name="j_username" value="petclinic@gmail.com" required="required" autofocus="autofocus"  />
+			<input type="password" class="form-control" placeholder="Password" name="j_password" value="petclinic" required="required" />
 			<!--
 			<label class="checkbox"> 
 				<input type="checkbox" value="true" name="_spring_security_remember_me"/> Remember me
