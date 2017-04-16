@@ -6,26 +6,23 @@ import edu.tcu.mi.spring.web.repository.jpa.JpaUserRepository;
 import edu.tcu.mi.spring.web.security.entity.PetclinicUserDetails;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.MessageSourceAware;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService extends AbstractGenericService<User> implements UserDetailsService, MessageSourceAware {
+public class UserService extends AbstractGenericService<User> implements UserDetailsService {
 
 	@Autowired 
 	private JpaUserRepository repository;
-	@Autowired 
-    private MessageSource messageSource;
-	
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
     	User user = repository.findOne(username);
-    	if (user == null)
-    		throw new UsernameNotFoundException(username);
+    	if (user == null) {
+			throw new UsernameNotFoundException(username);
+		}
 		return new PetclinicUserDetails(user);
     }
 
@@ -33,12 +30,6 @@ public class UserService extends AbstractGenericService<User> implements UserDet
     	return repository.findByRole(role);
     }
     
-    
-	@Override
-	public void setMessageSource(MessageSource _messageSource) {
-		messageSource = _messageSource;
-	}
-
 	@Override
 	JpaGenericRepository<User> getRepository() {
 		return repository;

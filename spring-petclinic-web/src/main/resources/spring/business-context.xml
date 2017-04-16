@@ -4,20 +4,16 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" 
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/tx 
 						http://www.springframework.org/schema/tx/spring-tx.xsd
 						http://www.springframework.org/schema/context 
 						http://www.springframework.org/schema/context/spring-context.xsd
 						http://www.springframework.org/schema/data/jpa 
-						http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-						http://www.springframework.org/schema/data/mongo 
-						http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd">
+						http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
 	<context:component-scan base-package="edu.tcu.mi.spring.web.service" />
@@ -34,6 +30,7 @@
 		</beans:bean>
 
 		<beans:bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			<beans:property name="showSql" value="${hibernate.show_sql}" />
 			<beans:property name="generateDdl" value="true" />
 			<beans:property name="database" value="${hibernate.database}" />
 			<beans:property name="databasePlatform" value="${hibernate.databasePlatform}" />
