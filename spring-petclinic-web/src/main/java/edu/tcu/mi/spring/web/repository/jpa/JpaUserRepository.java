@@ -1,11 +1,11 @@
 package edu.tcu.mi.spring.web.repository.jpa;
 
+import edu.tcu.mi.spring.web.entity.User;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
-import edu.tcu.mi.spring.web.entity.User;
-import edu.tcu.mi.spring.web.repository.UserRepository;
-
 @Repository
-public interface JpaUserRepository extends UserRepository, JpaGenericRepository<User>{
+public interface JpaUserRepository extends JpaGenericRepository<User>{
 
+	List<User> findByRole(String role);
 }

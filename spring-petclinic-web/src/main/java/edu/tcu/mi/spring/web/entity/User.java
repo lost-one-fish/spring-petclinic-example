@@ -1,24 +1,17 @@
 package edu.tcu.mi.spring.web.entity;
 
-import java.util.List;
+import com.google.gson.Gson;
+import edu.tcu.mi.spring.web.security.Authority;
+import org.springframework.data.annotation.Transient;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-
-import com.google.gson.Gson;
-
-import edu.tcu.mi.spring.web.security.Authority;
-
 @Entity
 @Table(name = "User")
-@Document(collection="user")
 public class User {
 	@org.springframework.data.annotation.Id
 	@Id
@@ -30,10 +23,6 @@ public class User {
 	
 	@Column(name = "role")
 	private String role;
-	
-	@DBRef
-	private List<Pet> pets;
-	
 	
 	@Transient
 	private static ShaPasswordEncoder encoder = new ShaPasswordEncoder();

@@ -1,22 +1,13 @@
 package edu.tcu.mi.spring.web.service;
 
+import edu.tcu.mi.spring.web.repository.jpa.JpaGenericRepository;
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.google.common.collect.Lists;
-
-import edu.tcu.mi.spring.web.repository.GenericRepository;
-import edu.tcu.mi.spring.web.repository.jpa.JpaGenericRepository;
-import edu.tcu.mi.spring.web.repository.mongo.MongoGenericRepository;
-
 public abstract class AbstractGenericService<T> {
 
-	static Logger logger = Logger.getLogger(AbstractGenericService.class);
-
-	abstract GenericRepository<T> getRepository();
+	abstract JpaGenericRepository<T> getRepository();
 	
 	public synchronized T save(T entity) {
 		return getRepository().save(entity);		
@@ -27,14 +18,7 @@ public abstract class AbstractGenericService<T> {
 	}
 
 	public synchronized List<T> findAll() {
-		GenericRepository<T> repository = getRepository();
-		if(repository instanceof MongoGenericRepository) {
-			return ((MongoGenericRepository<T>)repository).findAll();
-		}
-		if(repository instanceof JpaGenericRepository) {
-			return ((JpaGenericRepository<T>)repository).findAll();
-		}
-		return Lists.newArrayList();
+		return getRepository().findAll();
 	}
 
 	public synchronized Page<T> findAll(Pageable pageable) {
