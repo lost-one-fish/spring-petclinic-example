@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaUserRepository extends JpaGenericRepository<User>{
+public interface JpaUserRepository extends JpaGenericRepository<User> {
 
 	List<User> findByRole(String role);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JpaPetRepository extends JpaGenericRepository<Pet> {
+
 	List<Pet> findByType(PetType type);
 
 	List<Pet> findByTypeName(String typename);
