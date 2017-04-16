@@ -1,5 +1,6 @@
 package edu.tcu.mi.spring.web.security;
 
+import edu.tcu.mi.spring.web.entity.User;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
@@ -28,7 +29,7 @@ public class SpringAuthenticationProvider implements AuthenticationProvider {
 		String username = authentication.getName();
 		String password = (String)authentication.getCredentials();
 		ShaPasswordEncoder encoder = new ShaPasswordEncoder();
-		password = encoder.encodePassword(password, "Gaduo");
+		password = encoder.encodePassword(password, User.SEED);
 		UserDetails user = service.loadUserByUsername(username);
 		if (user == null) {
 			logger.error("Username not found.");
